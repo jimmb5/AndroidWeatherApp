@@ -2,43 +2,40 @@ package com.example.weatherapp.data.model
 
 import com.google.gson.annotations.SerializedName
 
-// Nämä data-luokat vastaavat API:n JSON-vastausta.
-// Gson-kirjasto osaa automaattisesti muuntaa JSON:n näiksi luokiksi.
-
 data class WeatherResponse(
-    val weather: List<Weather>,   // Lista säätiloista (yleensä 1 elementti)
-    val main: Main,               // Lämpötila, kosteus, paine
-    val wind: Wind,               // Tuulitiedot
-    val name: String,             // Kaupungin nimi
-    val sys: Sys                  // Maan koodi, auringonnousu/-lasku
+    val weather: List<Weather>,
+    val main: Main,
+    val wind: Wind,
+    val name: String,
+    val sys: Sys
 )
 
 data class Weather(
-    val id: Int,                  // Sään ID-koodi
-    val main: String,             // Pääkategoria: "Clouds", "Rain"
-    val description: String,      // Tarkempi kuvaus: "pilvistä"
-    val icon: String              // Kuvakkeen koodi: "04d"
+    val id: Int,
+    val main: String,
+    val description: String,
+    val icon: String
 )
 
 data class Main(
-    val temp: Double,             // Nykyinen lämpötila (°C kun units=metric)
-    val feels_like: Double,       // Tuntuu kuin -lämpötila
-    @SerializedName("temp_min")   // JSON: "temp_min" → Kotlin: tempMin
+    val temp: Double,
+    val feels_like: Double,
+    @SerializedName("temp_min")
     val tempMin: Double,
     @SerializedName("temp_max")
     val tempMax: Double,
-    val pressure: Int,            // Ilmanpaine (hPa)
-    val humidity: Int             // Kosteus (%)
+    val pressure: Int,
+    val humidity: Int
 )
 
 data class Wind(
-    val speed: Double,            // Tuulen nopeus (m/s)
-    val deg: Int                  // Tuulen suunta (asteet)
+    val speed: Double,
+    val deg: Int
 )
 
 data class Sys(
-    val country: String,          // Maakoodi: "FI"
-    val sunrise: Long,            // Auringonnousu (Unix timestamp)
-    val sunset: Long              // Auringonlasku (Unix timestamp)
+    val country: String,
+    val sunrise: Long,
+    val sunset: Long
 )
 

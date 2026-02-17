@@ -38,7 +38,6 @@ class WeatherRepository(context: Context) {
         val cachedEntity = weatherDao.getCachedWeatherByCity(city).first()
         val now = System.currentTimeMillis()
         if (cachedEntity != null && (now - cachedEntity.fetchedAt) < CACHE_MAX_AGE_MS) {
-            // Välimuisti voimassa → palauta Room-data, voi hakea uudestaan taustalla
             cachedEntity.toWeatherResponse().let { return Result.Success(it) }
         }
 
