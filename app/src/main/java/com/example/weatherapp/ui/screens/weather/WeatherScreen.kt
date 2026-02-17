@@ -9,16 +9,19 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.weatherapp.ui.components.ErrorScreen
 import com.example.weatherapp.ui.components.SearchBar
 import com.example.weatherapp.ui.components.WeatherContent
 import com.example.weatherapp.util.Result
 
-// Päänäkymä: kokoaa SearchBarin ja sisällön yhteen.
-// collectAsState() = kuuntele StateFlow:ta ja päivitä UI automaattisesti.
 @Composable
-fun WeatherScreen(viewModel: WeatherViewModel = viewModel()) {
+fun WeatherScreen(
+    viewModel: WeatherViewModel = viewModel(
+        factory = WeatherViewModelFactory(LocalContext.current.applicationContext)
+    )
+) {
     val searchQuery by viewModel.searchQuery.collectAsState()
     val weatherState by viewModel.weatherState.collectAsState()
 
